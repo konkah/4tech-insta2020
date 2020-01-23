@@ -28,5 +28,8 @@ export class UserController {
         return this.userService.deleteUser(user);
     }
 
-
+    @Put('addgrupo')
+    criarGrupo(@Body() newUser: UserViewModel[]){
+        return this.userService.createGroup(newUser);
+    }
 }

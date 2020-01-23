@@ -23,6 +23,13 @@ export class UserService {
         return this.userRepository.createUser(newUser);
     }
 
+    createGroup(newGroup: UserViewModel[]){
+        for(let i = 0; i < newGroup.length; i++)
+            this.createNewUser(newGroup[i]);
+        
+        return 'Group.';
+    }
+
     attemptLogin(login: LoginViewModel){
         const userList = this.userRepository.getUsers();
 
