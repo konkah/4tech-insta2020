@@ -7,7 +7,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    let joao = 'Oi';
-    return 'API do 4tech está de pé';
+    return this.appService.getHello();
   }
 }

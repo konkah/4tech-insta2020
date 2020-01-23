@@ -29,7 +29,7 @@ export class UserService {
         const foundLogin = userList
             .find(x => 
                 x.userLogin === login.userLogin &&
-                x.password === login.userPassword
+                x.password === login.password
             );
 
         return foundLogin;
