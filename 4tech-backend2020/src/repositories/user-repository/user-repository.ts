@@ -13,5 +13,10 @@ export class UserRepository {
         this.db.push(newUser);
         return 'User successfully added';
     }
+
+    deleteUser(user: UserViewModel){
+        this.db.splice(this.db.indexOf(user));
+        return 'User successfully removed';
+    }
 }
     

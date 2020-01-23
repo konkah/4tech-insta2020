@@ -34,4 +34,21 @@ export class UserService {
 
         return foundLogin;
     }
+
+    deleteUser(purge: UserViewModel){
+        const userList = this.userRepository.getUsers();
+
+        const foundLogin = userList
+            .find(x => 
+                x.userLogin === purge.userLogin &&
+                x.password === purge.password
+            );
+
+            if(foundLogin === null){
+                throw new BadRequestException('Page not found.');
+            }else{
+                return this.userRepository.deleteUser(foundLogin);
+            }
+
+    }
 }
