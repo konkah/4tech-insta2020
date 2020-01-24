@@ -42,7 +42,7 @@ export class UserService {
         return foundLogin;
     }
 
-    deleteOneUser(purge: UserViewModel){
+    deleteUser(purge: UserViewModel){
         const userList = this.userRepository.getUsers();
 
         const foundLogin = userList
@@ -59,20 +59,11 @@ export class UserService {
 
     }
 
-    deleteGroup(purge: UserViewModel){
-        const userList = this.userRepository.getUsers();
-
-        const foundLogin = userList
-            .find(x => 
-                x.userLogin === purge.userLogin &&
-                x.password === purge.password
-            );
-
-            if(foundLogin === null){
-                throw new BadRequestException('Page not found.');
-            }else{
-                return this.userRepository.deleteUser(foundLogin);
-            }
+    deleteGroup(purge: UserViewModel[]){
+        for(let i = 0; i < purge.length; i++)
+            this.deleteUser(purge[i]);
+        
+        return 'Group deleted.';
 
     }
 }

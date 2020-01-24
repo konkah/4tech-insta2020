@@ -26,13 +26,13 @@ export class UserController {
     }
 
     @Delete()
-    delGroup(@Body() group: UserViewModel){
+    delGroup(@Body() group: UserViewModel[]){
         return this.userService.deleteGroup(group);
     }
 
     @Delete()
     delUsuarios(@Body() user: UserViewModel){
-        return
+        return this.userService.deleteUser(user);
     }
 
     @Put('addgrupo')

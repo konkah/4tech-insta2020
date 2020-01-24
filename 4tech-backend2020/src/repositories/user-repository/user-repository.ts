@@ -16,7 +16,9 @@ export class UserRepository {
     }
 
     deleteUser(user: UserViewModel){
-        this.db.splice(this.db.indexOf(user));
+        const index = this.db.indexOf(user);
+        this.db.splice(index,1);
+        //this.db.splice(this.db.indexOf(user),1);
         return 'User successfully removed';
     }
 }
