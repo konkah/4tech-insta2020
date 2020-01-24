@@ -27,7 +27,7 @@ export class UserService {
         for(let i = 0; i < newGroup.length; i++)
             this.createNewUser(newGroup[i]);
         
-        return 'Group.';
+        return 'Group added.';
     }
 
     attemptLogin(login: LoginViewModel){
@@ -42,7 +42,24 @@ export class UserService {
         return foundLogin;
     }
 
-    deleteUser(purge: UserViewModel){
+    deleteOneUser(purge: UserViewModel){
+        const userList = this.userRepository.getUsers();
+
+        const foundLogin = userList
+            .find(x => 
+                x.userLogin === purge.userLogin &&
+                x.password === purge.password
+            );
+
+            if(foundLogin === null){
+                throw new BadRequestException('Page not found.');
+            }else{
+                return this.userRepository.deleteUser(foundLogin);
+            }
+
+    }
+
+    deleteGroup(purge: UserViewModel){
         const userList = this.userRepository.getUsers();
 
         const foundLogin = userList

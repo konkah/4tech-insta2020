@@ -3,8 +3,9 @@ import { UserViewModel } from 'src/domain/user.viewmodel';
 
 @Injectable()
 export class UserRepository {
-    db: UserViewModel[] = [];
-
+    db: UserViewModel[] = [
+        new UserViewModel('joao', 'joao', '12345'),
+    ];
     getUsers(){
         return this.db;
     }
@@ -19,4 +20,3 @@ export class UserRepository {
         return 'User successfully removed';
     }
 }
-    
