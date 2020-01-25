@@ -12,9 +12,9 @@ export class UserService {
         return this.userRepository.getUsers();
     }
 
-    createNewUser(newUser: UserViewModel){
+    async createNewUser(newUser: UserViewModel){
 
-        const userList = this.userRepository.getUsers();
+        const userList = await this.userRepository.getUsers();
         const existingUser = userList.find(x => x.userName === newUser.userName);
         if (existingUser){
             throw new BadRequestException('This username already exists!');
@@ -23,15 +23,15 @@ export class UserService {
         return this.userRepository.createUser(newUser);
     }
 
-    createGroup(newGroup: UserViewModel[]){
+    async createGroup(newGroup: UserViewModel[]){
         for(let i = 0; i < newGroup.length; i++)
-            this.createNewUser(newGroup[i]);
+          await this.createNewUser(newGroup[i]);
         
         return 'Group added.';
     }
 
-    attemptLogin(login: LoginViewModel){
-        const userList = this.userRepository.getUsers();
+    async attemptLogin(login: LoginViewModel){
+        const userList = await this.userRepository.getUsers();
 
         const foundLogin = userList
             .find(x => 
@@ -42,26 +42,28 @@ export class UserService {
         return foundLogin;
     }
 
-    deleteUser(purge: UserViewModel){
-        const userList = this.userRepository.getUsers();
+    async deleteUser(purge: UserViewModel){
+        const userList = await this.userRepository.getUsers();
 
         const foundLogin = userList
             .find(x => 
                 x.userLogin === purge.userLogin &&
                 x.password === purge.password
             );
-
-            if(foundLogin === null){
+            
+            return foundLogin;
+            /*if(foundLogin === null){
                 throw new BadRequestException('Page not found.');
             }else{
-                return this.userRepository.deleteUser(foundLogin);
-            }
+                //return this.userRepository.deleteUser(foundLogin);
+                return 'Deleted'
+            }*/
 
     }
 
-    deleteGroup(purge: UserViewModel[]){
+    async deleteGroup(purge: UserViewModel[]){
         for(let i = 0; i < purge.length; i++)
-            this.deleteUser(purge[i]);
+          await this.deleteUser(purge[i]);
         
         return 'Group deleted.';
 

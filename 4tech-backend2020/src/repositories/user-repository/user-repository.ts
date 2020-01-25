@@ -1,24 +1,37 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { UserViewModel } from 'src/domain/user.viewmodel';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User } from 'src/domain/schemas/user.schema';
 
 @Injectable()
 export class UserRepository {
-    db: UserViewModel[] = [
-        new UserViewModel('joao', 'joao', '12345'),
-    ];
-    getUsers(){
-        return this.db;
+    constructor(
+        @InjectModel('User') private readonly userCollection: Model<User>){
+
+    }
+    async getUsers(): Promise<User[]>{
+        return await this.userCollection
+            .find()
+            .lean();
     }
 
-    createUser(newUser: UserViewModel){
-        this.db.push(newUser);
-        return 'User successfully added';
+    async createUser(newUser: UserViewModel){
+        const user = this.userCollection(newUser);
+        return await user.save();
+        //this.db.push(newUser);
+        //return 'User successfully added';
     }
 
     deleteUser(user: UserViewModel){
-        const index = this.db.indexOf(user);
-        this.db.splice(index,1);
+        //const index = this.db.indexOf(user);
+        //this.db.splice(index,1);
         //this.db.splice(this.db.indexOf(user),1);
-        return 'User successfully removed';
+        /*if(index === null){
+            throw new BadRequestException('Page not found.');
+        }else{
+            return this.deleteUser(index);
+        }*/
+        //return 'User successfully removed';
     }
 }
