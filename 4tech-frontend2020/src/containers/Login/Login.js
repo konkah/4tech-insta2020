@@ -1,7 +1,7 @@
-import React, { userState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Login = ({ name, age }) => {
-    const [login, setLogin] = userState('');
+    const [login, setLogin] = useState('');
 
     useEffect(() => {
         console.log('Alterei o Login');
