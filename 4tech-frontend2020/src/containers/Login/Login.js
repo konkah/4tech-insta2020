@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import {Button} from '@material-ui/core';
 
 const Login = ({ name, age }) => {
     const [login, setLogin] = useState('');
 
-    useEffect(() => {
-        console.log('Alterei o Login');
-        return (() => {
-            console.log('terminei mae!');
-        })
-    }, [login])
-
     const onLoginChange = (event) => {
-        console.log(event.target.value);
         setLogin(event.target.value);
     };
 
     return (
-        <div>
+        <div className="login">
+            <form>
+                <Button color="primary">Sign in</Button>
+            </form>
             <input type="text" value={login} onChange={onLoginChange} />
             Login works!!! {name} {age}
         </div>
