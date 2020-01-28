@@ -1,0 +1,15 @@
+.Login {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.Login .grid {
+    min-width: 220px;
+}
+
+.Login .paper {
+    padding: 2rem 2rem;
+}
