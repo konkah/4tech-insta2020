@@ -1,4 +1,4 @@
-import {axios4tech} from './config';
+import { axios4tech } from './config';
 
 export const user = {
     register: async (userLogin, userName, password) =>{

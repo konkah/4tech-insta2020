@@ -1,13 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { logout } from '../../services/auth';
+
 import { AppBar, Container, Toolbar, Typography, IconButton } from '@material-ui/core';
-import {ExitToApp} from '@material-ui/icons';
+import { ExitToApp } from '@material-ui/icons';
 
 import './Header.css';
 
 const Header = () => {
-    const onLogout = () => {
+    const history = useHistory();
 
+    const onLogout = () => {
+        logout();
+        history.push('/');
     };
+    
     return(
         <AppBar className="header" position="fixed">
             <Container>

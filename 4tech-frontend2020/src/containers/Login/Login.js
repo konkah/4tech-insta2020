@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import {user} from '../../services/user';
-import {login} from '../../services/auth';
+import { user } from '../../services/user';
+import { login } from '../../services/auth';
 
-import {Button, TextField, Grid, Paper, Typography} from '@material-ui/core';
+import { Button, TextField, Grid, Paper, Typography } from '@material-ui/core';
 
 import './Login.css';
 
