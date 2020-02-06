@@ -1,20 +1,20 @@
 import { axios4tech } from './config';
 
-export const login = async (userLogin, password) => {
+export const login = async (user, password) => {
     try{
         const response = await axios4tech.post('auth/login', {
-            userLogin,
-            password
+            userLogin: user,
+            password: password
         });
 
-        if(response.status >= 200 && response.status < 300){
-            console.log(response);
-            localStorage.setItem('token', response.data.access_token);
-            localStorage.setItem('userId', response.data.userId);
-            return response;
-        }
-    } catch (e) {
-        return e;
+        localStorage.setItem('token', response.data.access_token);
+        localStorage.setItem('userId', response.data.userId);            
+        return response;
+        } catch (err) {
+            if(err.response){
+                return err.response.status;
+            }
+        return 500;
     }
 };
 
@@ -25,4 +25,4 @@ export const isAuthenticated = () => {
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-}
+};

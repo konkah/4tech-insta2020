@@ -14,3 +14,7 @@ axios4tech.interceptors.request.use((config) => {
 
     return config;
 });
+
+axios4tech.interceptors.response.use(null, (error) => {
+    return Promise.reject(error);
+});
