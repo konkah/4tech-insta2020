@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import Login from './containers/Login/Login';
-import Timeline from './containers/Timeline/Timeline';
+import TimeLine from './containers/TimeLine/TimeLine';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 
 import './App.css';
@@ -20,7 +20,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
-        <PrivateRoute path="/timeline" component={Timeline} />
+        <PrivateRoute path="/timeline" component={TimeLine} />
         <Redirect to="/" />
       </Switch>
     </Router>
